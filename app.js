@@ -19,9 +19,11 @@ var Resultado = new Schema({
 
 var Futebol = mongoose.model('futebols', Resultado,'futebols');
 
+app.enable('trust proxy');
+
 // Definir a route principal
 app.get('/', function(req, res) {
-    req.protocol=https;
+    res.redirect('https://'+req.headers.host+req.url);
     
     db.on('error', console.error.bind(console, 'connection error:'));
     
