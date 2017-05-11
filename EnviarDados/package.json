@@ -1,0 +1,17 @@
+{
+  "name": "sdmongo",
+  "version": "1.0.0",
+  "description": "Loja de Livros",
+  "main": "app.js",
+  "dependencies": {
+    "body-parser": "*",
+    "express": "^4.15.2",
+    "mongoose": "^4.9.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "JDinis",
+  "license": "ISC"
+}
