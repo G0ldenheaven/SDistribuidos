@@ -21,6 +21,8 @@ var Futebol = mongoose.model('futebols', Resultado,'futebols');
 
 // Definir a route principal
 app.get('/', function(req, res) {
+    req.protocol=https;
+    
     db.on('error', console.error.bind(console, 'connection error:'));
     
     var cursor = Futebol.find({}).cursor();
@@ -33,7 +35,7 @@ app.get('/', function(req, res) {
             res.write('<title>Futebol - Pplware</title>');
             res.write("<script type='text/javascript' src='scripts/jquery.min.js'></script>");
             res.write("<script type='text/javascript' src='scripts/bootstrap.min.js'></script>");
-            res.write("<link rel='stylesheet' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'/>");
+            res.write("<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'/>");
         res.write('</head>');
         
         res.write('<body style="width:100%">');
