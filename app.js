@@ -22,9 +22,7 @@ var Futebol = mongoose.model('futebols', Resultado,'futebols');
 app.enable('trust proxy');
 
 // Definir a route principal
-app.get('/', function(req, res) {
-    res.redirect('https://'+req.headers.host+req.url);
-    
+app.get('/', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
     var cursor = Futebol.find({}).cursor();
