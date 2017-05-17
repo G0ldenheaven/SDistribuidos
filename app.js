@@ -74,5 +74,5 @@ app.get('/', function(req, res) {
     });
 });
 
-// Aplicação disponível em http://127.0.0.1:8888/
-app.listen(8080);
+// AplicaÃ§Ã£o disponÃ­vel em http://127.0.0.1:8888/
+app.listen(80);
