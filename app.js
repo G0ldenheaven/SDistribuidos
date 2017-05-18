@@ -33,7 +33,7 @@ app.enable('trust proxy');
 // Definir a route principal
 app.get('/', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
-    res.redirect('https://' + req.get('host') + req.url);
+    res.redirect('https://' + req.get('host') +':443'+ req.url);
     
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
