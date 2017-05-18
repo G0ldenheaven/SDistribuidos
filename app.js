@@ -24,7 +24,6 @@ app.enable('trust proxy');
 // Definir a route principal
 app.get('/', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
-    
     var cursor = Futebol.find({}).cursor();
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write("<!DOCTYPE html>");
@@ -75,4 +74,4 @@ app.get('/', function(req, res) {
 });
 
 // Aplicação disponível em http://127.0.0.1:8888/
-app.listen(8888);
+app.listen('localhost');
