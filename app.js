@@ -1,8 +1,11 @@
+
+
 var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var utils = require('util');
 var promise = require('promises');
+var port = process.env.port || 3000;
 
 mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
 
@@ -74,4 +77,4 @@ app.get('/', function(req, res) {
 });
 
 // Aplicação disponível em http://127.0.0.1:8888/
-app.listen('localhost');
+app.listen(port,'0.0.0.0');
