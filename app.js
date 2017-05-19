@@ -59,22 +59,29 @@ app.get('/login', function(req, res) {
     res.write(header);
     
     var id = req.query.id;
-        
-    var uCursor = UserList.find({myid:id}).exec(function(err, data) {
-        if (err) return done(err);
-        data.forEach(function (user){
-            var getSignedMenu;
-            if(id!=null || user!=null){                
-                getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
-            }else{
-                getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
-            }
-            res.write(getSignedMenu);
-            res.write(getLoginPageContent);
-            res.end(endPage);
-        });
-    });
+    var getSignedMenu;
     
+    if(id!=null){
+        var uCursor = UserList.find({myid:id}).exec(function(err, data) {
+            if (err) return done(err);
+            data.forEach(function (user){
+                if(user!=null){                
+                    getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
+                }else{
+                    getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
+                }
+                
+                res.write(getSignedMenu);
+                res.write(getLoginPageContent);
+                res.end(endPage);
+            });
+        });
+    }else{
+                getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
+                res.write(getSignedMenu);
+                res.write(getLoginPageContent);
+                res.end(endPage);
+    }
 });
 
 // Definir a route principal
