@@ -66,6 +66,8 @@ app.get('/login', function(req, res) {
             var getSignedMenu;
             if(id!=null || user!=null){                
                 getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
+            }else{
+                getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
             }
             res.write(getSignedMenu);
             res.write(getLoginPageContent);
