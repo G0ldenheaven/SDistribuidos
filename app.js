@@ -64,7 +64,7 @@ app.get('/login', function(req, res) {
         if (err) return done(err);
         data.forEach(function (user){
             var getSignedMenu;
-            if(id!=null){                
+            if(id!=null || user!=null){                
                 getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
             }
             res.write(getSignedMenu);
