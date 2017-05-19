@@ -6,6 +6,7 @@ var promise = require('promises');
 var header = require('./scripts/htmlContent.js').header();
 var getMenu = require('./scripts/htmlContent.js').getMenu();
 var endPage = require('./scripts/htmlContent.js').endPage();
+var getLoginPageContent = require('./scripts/login.js').getLoginPageContent();
 var port = process.env.port || 443;
 
 mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
