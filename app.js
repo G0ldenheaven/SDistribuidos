@@ -39,14 +39,26 @@ app.get('/', function(req, res) {
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
 });
 
-// Definir a route principal
+// Signed in user
+app.get('/users?:username=', function(req, res) {    
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(header);
+    
+    res.write("This: " + req.param('username'));
+    res.write(getMenu());
+
+    var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
+});
+
+// Login
 app.get('/login', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
-    res.write("This: " + req.param);
     res.write(getMenu());
 
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
