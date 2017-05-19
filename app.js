@@ -28,7 +28,7 @@ var Resultado = new Schema({
 
 var Futebol = mongoose.model('futebols', Resultado,'futebols');
 
-app.enable('trust proxy');
+app.set('trust proxy','0.0.0.0');
 
 
 // Definir a route principal
