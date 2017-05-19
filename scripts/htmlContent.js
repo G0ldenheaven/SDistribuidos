@@ -19,7 +19,7 @@
                                 '<a href="/">Home<span class="sr-only">(current)</span></a>'+
                             '</li>'+
                             '<li>'+
-                                '<a href="/?login="'+req.query+'>Login</a>'+
+                                '<a href="/?login="'+req+'>Login</a>'+
                             '</li>'+
                             '<li>'+
                                 '<a href="/contact">Contact us</a>'+
