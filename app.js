@@ -5,6 +5,8 @@ var utils = require('util');
 var promise = require('promises');
 var header = require('./scripts/htmlContent.js').header();
 var getMenu = require('./scripts/htmlContent.js').getMenu();
+var getMenu = require('./scripts/login.js').getSignedMenu();
+var getMenu = require('./scripts/login.js').getLoginPageContent();
 var endPage = require('./scripts/htmlContent.js').endPage();
 var port = process.env.port || 443;
 
@@ -47,7 +49,7 @@ app.get('/users', function(req, res) {
     res.write(header);
     
     res.write("This: ");
-    res.write(getMenu());
+    res.write(getSignedMenu());
 });
 
 // Login
