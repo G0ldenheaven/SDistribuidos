@@ -51,6 +51,7 @@ app.get('/login', function(req, res) {
     res.write(getSignedMenu);
 
     res.write(getLoginPageContent);
+    res.end(endPage);
 });
 
 app.listen(port,'0.0.0.0');

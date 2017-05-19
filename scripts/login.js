@@ -15,9 +15,8 @@
                     '</nav>';
     };
 
-    function getLoginPageContent(res,Futebol){
+    function getLoginPageContent(){
         var html ="";
-        res.end(endPage);        
     };
 
 var exports = module.exports = {getSignedMenu,getLoginPageContent};
