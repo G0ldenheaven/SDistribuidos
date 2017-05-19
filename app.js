@@ -65,12 +65,15 @@ app.get('/login', function(req, res) {
         var uCursor = UserList.find({myid:id}).exec(function(err, data) {
             if (err) return done(err);
             data.forEach(function (user){
-                if(user!=null){                
-                    getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
-                }else{
+                if(user==null){
                     getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
+                    res.write(getSignedMenu);
+                    res.write(getLoginPageContent);
+                    res.end(endPage);
+                    return;
                 }
                 
+                getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
                 res.write(getSignedMenu);
                 res.write(getLoginPageContent);
                 res.end(endPage);
