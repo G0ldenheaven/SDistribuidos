@@ -60,6 +60,8 @@ app.get('/login', function(req, res) {
     
     var getSignedMenu = require('./scripts/login.js').getSignedMenu(req);
     res.write(getSignedMenu);
+    
+    var cursor = UserList.find({}).cursor();
  
     cursor.on('data', function(usr){
         if(usr.id==id){
