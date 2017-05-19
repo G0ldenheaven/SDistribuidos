@@ -5,8 +5,8 @@ var utils = require('util');
 var promise = require('promises');
 var header = require('./scripts/htmlContent.js').header();
 var getMenu = require('./scripts/htmlContent.js').getMenu();
-var getMenu = require('./scripts/login.js').getSignedMenu();
-var getMenu = require('./scripts/login.js').getLoginPageContent();
+var getSignedMenu = require('./scripts/login.js').getSignedMenu();
+var getLoginPageContent = require('./scripts/login.js').getLoginPageContent();
 var endPage = require('./scripts/htmlContent.js').endPage();
 var port = process.env.port || 443;
 
@@ -46,20 +46,20 @@ app.get('/users', function(req, res) {
     db.on('error', console.error.bind(console, 'connection error:'));
     
     res.writeHead(200, {'Content-Type': 'text/html'});
-    //res.write(header);
+    res.write(header);
     
     res.write("This: ");
-    //res.write(getSignedMenu());
+    res.write(getSignedMenu());
 });
 
 // Login
 app.get('/login', function(req, res) {    
-    //db.on('error', console.error.bind(console, 'connection error:'));
+    db.on('error', console.error.bind(console, 'connection error:'));
     
-    //res.writeHead(200, {'Content-Type': 'text/html'});
-    //res.write(header);
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(header);
     
-    //res.write(getMenu());
+    res.write(getMenu());
 });
 
 app.listen(port,'0.0.0.0');
