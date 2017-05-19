@@ -67,6 +67,12 @@ app.get('/login', function(req, res) {
         }
     });
     
+    cursor.on('data', function(usr){
+        if(usr.id==id){
+            res.write(usr.username);
+        }
+    });
+    
     res.write(" "+id);
 
     res.write(getLoginPageContent);
