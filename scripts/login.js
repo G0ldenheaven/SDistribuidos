@@ -17,7 +17,7 @@
 
     function getLoginPageContent(res,Futebol){
         var html ="";
-        
+        res.end(endPage);        
     };
 
 var exports = module.exports = {getSignedMenu,getLoginPageContent};

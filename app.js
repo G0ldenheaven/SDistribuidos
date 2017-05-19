@@ -47,7 +47,7 @@ app.get('/login', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
-    var getSignedMenu = require('./scripts/htmlContent.js').getSignedMenu(res);
+    var getSignedMenu = require('./scripts/htmlContent.js').getSignedMenu(req);
     res.write(getSignedMenu);
 
     res.write(getLoginPageContent);
