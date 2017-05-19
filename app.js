@@ -36,7 +36,6 @@ app.get('/', function(req, res) {
     db.on('error', console.error.bind(console, 'connection error:'));
     
     res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(req.protocol);
     res.write(header);
     res.write(getMenu);
 
