@@ -17,6 +17,7 @@
 
     function getLoginPageContent(){
         var html ="";
+        return html;
     };
 
 var exports = module.exports = {getSignedMenu,getLoginPageContent};
