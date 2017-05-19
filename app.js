@@ -40,13 +40,13 @@ app.get('/', function(req, res) {
 });
 
 // Signed in user
-app.get('/users/:username', function(req, res) {    
+app.get('/users', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
-    res.write("This: " + req.param('username'));
+    res.write("This: ");
     res.write(getMenu());
 });
 
