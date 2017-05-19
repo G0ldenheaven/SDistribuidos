@@ -11,15 +11,15 @@
                     '</head>';
     };
 
-    var getMenu = function(){
+    var getMenu = function(req){
         return '<body style="width:100%">'+
-                    '<nav class="navbar navbar-inverse" role="navigation" style="padding-left:130px;">'+
+                    '<nav class="navbar navbar-inverse" role="navigation" style="padding-right:130px;">'+
                         '<ul class="nav navbar-nav">'+
                             '<li class="active">'+
                                 '<a href="/">Home<span class="sr-only">(current)</span></a>'+
                             '</li>'+
                             '<li>'+
-                                '<a href="/about">About us</a>'+
+                                '<a href="/?login="'+req.query.login+'>Login</a>'+
                             '</li>'+
                             '<li>'+
                                 '<a href="/contact">Contact us</a>'+

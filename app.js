@@ -8,11 +8,7 @@ var getMenu = require('./scripts/htmlContent.js').getMenu();
 var endPage = require('./scripts/htmlContent.js').endPage();
 var port = process.env.port || 443;
 
-mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5')
-.then(function(result) { console.log('here'+result); return result;})
-    .catch(function(error) {
-        console.log(error);
-    });
+mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
 
 var db = mongoose.connection;
 var Schema = mongoose.Schema;
@@ -37,7 +33,9 @@ app.get('/', function(req, res) {
     
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
-    res.write(getMenu);
+    
+    var getMenuLinks = require('./scripts/htmlContent.js').getMenu(req);
+    res.write(getMenuLinks);
 
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
 });
