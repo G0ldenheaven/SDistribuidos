@@ -30,34 +30,6 @@
 
     function getMainPageContent(res,Futebol){
         var html ="";
-        var cursor = Futebol.find({}).cursor();
-
-        cursor.on('data', function(jogo){
-            html+='<div>'+
-                    '<img style="height:100px" src="data:image/jpeg;base64,'+ jogo.equipaCasa.toString('base64') +'"/>'+
-                    '<span>'+jogo.nome+
-                    '<img style="height:100px" src="data:image/jpeg;base64,'+ jogo.equipaCasa.toString('base64') +'"/>'+
-                    '<br/>'+
-                    jogo.golosCasa.toString()+' : '+jogo.golosFora.toString()+
-                    '</span>'+
-                '</div>';
-        });
-
-        cursor.on('close',function(){
-            html = '<center style="width:100%"'+
-                    '<div>'+
-                        '<b style="font-size:30px">Resultados dos Jogos Disputados Hoje'+
-                        '<br/>'+
-                        '<br/>'+
-                        html+
-                        '</b>'+
-                    '</div>'+
-                '</center>';
-            res.write(html);  
-            res.end(endPage);
-        });
-
-        
     };
 
     var endPage = function(){

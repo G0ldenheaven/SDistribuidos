@@ -34,8 +34,20 @@ app.get('/', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
-    var getMenuLinks = require('./scripts/htmlContent.js').getMenu(req);
-    res.write(getMenuLinks);
+    res.write(getMenu());
+
+    var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
+});
+
+// Definir a route principal
+app.get('/login', function(req, res) {    
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(header);
+    
+    res.write("This: " + req.param);
+    res.write(getMenu());
 
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(res,Futebol);
 });
