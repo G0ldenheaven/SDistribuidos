@@ -69,7 +69,7 @@ app.get('/login', function(req, res) {
         }
     });
     
-    cursor.on('data', function(usr){
+    cursor.on('close', function(usr){
         if(usr.id==id){
             res.write(usr.username);
         }
