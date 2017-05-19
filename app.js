@@ -35,7 +35,6 @@ app.enable('trust proxy');
 app.get('/', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
-    app.enable('trust proxy');
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(req.protocol);
     res.write(header);
