@@ -34,9 +34,9 @@
 
         cursor.on('data', function(jogo){
             html+='<div>'+
-                    '<img style="height:100px" src="data:image/jpeg;base64,'+ jogo.equipaCasa.toString('base64') +'"/>'+
+                    '<img style="height:100px" src="'+ jogo.equipaCasa.toString('base64') +'"/>'+
                     '<span>'+jogo.nome+
-                    '<img style="height:100px" src="data:image/jpeg;base64,'+ jogo.equipaCasa.toString('base64') +'"/>'+
+                    '<img style="height:100px" src="'+ jogo.equipaFora.toString('base64') +'"/>'+
                     '<br/>'+
                     jogo.golosCasa.toString()+' : '+jogo.golosFora.toString()+
                     '</span>'+

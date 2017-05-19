@@ -9,30 +9,32 @@ var endPage = require('./scripts/htmlContent.js').endPage();
 var getLoginPageContent = require('./scripts/login.js').getLoginPageContent();
 var port = process.env.port || 443;
 
-mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
+//mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
+mongoose.connect('mongodb://Goldenheaven:sdistribuidos@ds062919.mlab.com:62919/futebol');
 
 var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
-var Resultado = new Schema({
-    id: Number,
+var ResultadoSchema = new Schema({
+    myid: Number,
     nome: String,
-    equipaCasa: Buffer,
+    equipaCasa: String,
     golosCasa: Number,
     golosFora: Number,
-    equipaFora: Buffer
+    equipaFora: String
 });
 
 
-var Users = new Schema({
-    id: Number,
+
+var UsersSchema = new Schema({
+    myid: Number,
     username: String,
     pwd: String
 });
 
 
-var Futebol = mongoose.model('futebols', Resultado,'futebols');
-var UserList = mongoose.model('users', Users,'users');
+var Futebol = mongoose.model('futebols', ResultadoSchema,'futebols' );
+var UserList = mongoose.model('users',UsersSchema,'users');
 
 app.set('trust proxy','0.0.0.0');
 
@@ -57,28 +59,17 @@ app.get('/login', function(req, res) {
     res.write(header);
     
     var id = req.query.id;
-    
-    var getSignedMenu = require('./scripts/login.js').getSignedMenu(req);
-    res.write(getSignedMenu);
-    
-    var cursor = UserList.find({}).cursor();
- 
-    cursor.on('data', function(usr){
-        if(usr.id==id){
-            res.write(usr.username);
-        }
+        
+    var uCursor = UserList.find({myid:id}).exec(function(err, data) {
+        if (err) return done(err);
+        data.forEach(function (user){
+            var getSignedMenu = require('./scripts/login.js').getSignedMenu(user);
+            res.write(getSignedMenu);
+            res.write(getLoginPageContent);
+            res.end(endPage);
+        });
     });
     
-    cursor.on('close', function(usr){
-        if(usr.id==id){
-            res.write(usr.username);
-        }
-    });
-    
-    res.write(" "+id);
-
-    res.write(getLoginPageContent);
-    res.end(endPage);
 });
 
 // Definir a route principal
