@@ -15,6 +15,7 @@ var db = mongoose.connection;
 var Schema = mongoose.Schema;
 
 var Resultado = new Schema({
+    id: Number,
     nome: String,
     equipaCasa: Buffer,
     golosCasa: Number,
@@ -23,7 +24,15 @@ var Resultado = new Schema({
 });
 
 
+var Users = new Schema({
+    id: Number,
+    username: String,
+    pwd: String
+});
+
+
 var Futebol = mongoose.model('futebols', Resultado,'futebols');
+var UserList = mongoose.model('users', Users,'users');
 
 app.set('trust proxy','0.0.0.0');
 
@@ -47,8 +56,36 @@ app.get('/login', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
+    var id = req.query.id;
+    
     var getSignedMenu = require('./scripts/login.js').getSignedMenu(req);
     res.write(getSignedMenu);
+ 
+    cursor.on('data', function(usr){
+        if(usr.id==id){
+            res.write(usr.username);
+        }
+    });
+    
+    res.write(" "+id);
+
+    res.write(getLoginPageContent);
+    res.end(endPage);
+});
+
+// Definir a route principal
+app.get('/user', function(req, res) {    
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(header);
+    
+    var username = req.query.username;
+    
+    var getSignedMenu = require('./scripts/login.js').getSignedMenu(username);
+    res.write(getSignedMenu);
+
+    res.write(username);
 
     res.write(getLoginPageContent);
     res.end(endPage);
