@@ -78,6 +78,7 @@ app.get('/user', function(req, res) {
             
             if(data.length==0) {
                 res.status(500);
+                console.log(res.status);
                 res.send('Invalid user data!');
                 return;
             };
