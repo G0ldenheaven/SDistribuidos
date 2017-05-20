@@ -76,11 +76,8 @@ app.get('/user', function(req, res) {
             if (err) return done(err);
             
             if(data.length==0) {
-                    getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
-                    res.write(getSignedMenu);
-                    res.write(getLoginPageContent);
-                    res.end(endPage);
-                    return;
+                res.status(500).send('Invalid user data!');
+                return;
             };
             
             data.forEach(function (user){
@@ -91,7 +88,10 @@ app.get('/user', function(req, res) {
             });
         });
     }else{
-        res.status(500).send('Invalid user data!');
+        getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
+        res.write(getSignedMenu);
+        res.write(getLoginPageContent);
+        res.end(endPage);
     }
 });
 
