@@ -55,16 +55,16 @@ app.get('/', function(req, res) {
 app.get('/login', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
-    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
-    res.write(header);
+    //res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
+    //res.write(header);
     
-    res.render('./logintest.js');
+    res.sendFile('./logintest.js');
     //res.write(getLoginPageContent);
     //res.end(endPage);
 });
 
 // Definir a route principal
-app.get('/user', function(req, res) {    
+app.get('/users', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
