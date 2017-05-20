@@ -43,7 +43,7 @@ app.set('trust proxy','0.0.0.0');
 app.get('/', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     res.write(header);
     
     res.write(getMenu);
@@ -55,7 +55,7 @@ app.get('/', function(req, res) {
 app.get('/login', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     res.write(header);
     
     res.write(getLoginPageContent);
@@ -66,7 +66,7 @@ app.get('/login', function(req, res) {
 app.get('/user', function(req, res) {    
     db.on('error', console.error.bind(console, 'connection error:'));
     
-    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     res.write(header);
     
     var id = req.query.id;
