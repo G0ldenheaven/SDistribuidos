@@ -58,8 +58,9 @@ app.get('/login', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html; charset=utf-8'});
     res.write(header);
     
-    res.write(getLoginPageContent);
-    res.end(endPage);
+    res.render('./logintest.js');
+    //res.write(getLoginPageContent);
+    //res.end(endPage);
 });
 
 // Definir a route principal
