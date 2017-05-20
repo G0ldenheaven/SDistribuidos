@@ -77,7 +77,7 @@ app.get('/user', function(req, res) {
             if (err) return done(err);
             
             if(data.length==0) {
-                res.writeHead(500, {'Content-Type': 'text/html; charset=utf-8'});
+                res.status(500);
                 res.send('Invalid user data!');
                 return;
             };
