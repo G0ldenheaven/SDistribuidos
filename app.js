@@ -58,6 +58,16 @@ app.get('/login', function(req, res) {
     res.writeHead(200, {'Content-Type': 'text/html'});
     res.write(header);
     
+    
+});
+
+// Definir a route principal
+app.get('/user', function(req, res) {    
+    db.on('error', console.error.bind(console, 'connection error:'));
+    
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(header);
+    
     var id = req.query.id;
     var getSignedMenu;
     
@@ -81,29 +91,8 @@ app.get('/login', function(req, res) {
             });
         });
     }else{
-                getSignedMenu = require('./scripts/login.js').getSignedMenu(null);
-                res.write(getSignedMenu);
-                res.write(getLoginPageContent);
-                res.end(endPage);
+        res.status(500).send('Invalid user data!');
     }
-});
-
-// Definir a route principal
-app.get('/user', function(req, res) {    
-    db.on('error', console.error.bind(console, 'connection error:'));
-    
-    res.writeHead(200, {'Content-Type': 'text/html'});
-    res.write(header);
-    
-    var username = req.query.username;
-    
-    var getSignedMenu = require('./scripts/login.js').getSignedMenu(username);
-    res.write(getSignedMenu);
-
-    res.write(username);
-
-    res.write(getLoginPageContent);
-    res.end(endPage);
 });
 
 app.listen(port,'0.0.0.0');
