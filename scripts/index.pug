@@ -1,0 +1,72 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="utf-8")
+    title='Futebol - Pplware'
+    meta(name="viewport",content="width=device-width, initial-scale=1")
+    block styles
+        link(href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",rel="stylesheet")
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+    block scripts
+        script(src="http://code.jquery.com/jquery-1.11.1.min.js")
+        script(src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js")
+body(style="width:100%")
+div(class="navbar navbar-inverse nav")
+    div(class="navbar-inner")
+        div(class="container")
+            a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
+                span(class="icon-bar")
+                span(class="icon-bar")
+                span(class="icon-bar")
+            a(class="brand",href="/") NewsSport
+            div(class="nav-collapse collapse")
+                ul(class="nav")
+                    li(class="divider-vertical")
+                    li 
+                        a(href="/")
+                            i(class="icon-home icon-white") 
+                                p(style="padding-left:18px;font-style:normal;") Home
+                div(class="pull-right")
+                    ul(class="nav pull-right")
+                        if(typeof({user}.user)==="object")
+                            - var userdata = {user}.user.user;
+                            - console.log("here");
+                            each user in userdata
+                                if {user}
+                                    li(class="dropdown")
+                                        a(href="#",class="dropdown-toggle",data-toggle="dropdown") Welcome, #{user.username}
+                                            b(class="caret")
+                                        ul(class="dropdown-menu")
+                                            li 
+                                                a(href="/users?id="+user.id,style="height:23px")
+                                                    i(class="icon-cog")
+                                                    p(style="padding-left:18px;top:8px;position:absolute;font-style:normal;") Control Panel
+                                            li
+                                                a(href="/help/support",style="height:23px")
+                                                    i(class="icon-envelope")
+                                                    p(style="padding-left:18px;top:-20px;position:relative;font-style:normal;") Contact Support
+                                            li(class="divider")
+                                            li
+                                                a(href="/logout",style="height:23px")
+                                                    i(class="icon-off")
+                                                    p(style="padding-left:18px;top:-20px;position:relative;font-style:normal;") Logout
+                                else
+                                    li(class="dropdown")
+                                        a(href="/Login") Welcome, Guest
+                        else
+                            li(class="dropdown")
+                                a(href="/Login") Welcome, Guest
+
+div(style="margin-top:-35px")
+    center .
+    if(jogos)
+        each jogo in jogos
+            each dados in jogo
+                div
+                    center(style="margin-top:5%")
+                        - var jg = dados;
+                        span(style="position:absolute;right:0;left:0;font-size:24px;font-weight:900;") #{jg.nome}
+                        p(style="position:absolute;left:0;right:0;margin-top:45px;font-size:24px;font-weight:900;") #{jg.golosCasa} : #{jg.golosFora}
+                        div(width="400px",style="margin-top:-40px;")
+                            img(id="lol" style="height:100px;", src="data:image/png;base64,"+jg.equipaFora)
+                            img(style="height:100px;margin-left:200px;",src= "data:image/png;base64," + jg.equipaCasa)

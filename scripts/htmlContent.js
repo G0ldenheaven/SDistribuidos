@@ -1,4 +1,6 @@
-    var header = function(){
+   var json;   
+
+   var header = function(){
         return "<!DOCTYPE html>"+
                 '<html>'+
 
@@ -7,6 +9,8 @@
                         '<title>Futebol - Pplware</title>'+
                         "<script type='text/javascript' src='scripts/jquery.min.js'></script>"+
                         "<script type='text/javascript' src='scripts/bootstrap.min.js'></script>"+
+                        "<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css'>"+
+                        "<link rel='stylesheet' href='https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'>"+
                         "<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css'/>"+
                     '</head>';
     };
@@ -28,35 +32,43 @@
                     '</nav>';
     };
 
-    function getMainPageContent(res,Futebol){
+    function getMainPageContent(req,res,pug,Futebol){
         var html ="";
         var cursor = Futebol.find({}).cursor();
-
+        var i = 0;
+        json = "{ \"jogos\": [";
+        
         cursor.on('data', function(jogo){
-            html+='<div>'+
+            json+= "{ \"equipaCasa\": \""+jogo.equipaCasa.toString('base64')+"\","+
+                    "\"nome\": \""+jogo.nome+"\","+
+                    "\"equipaFora\": \""+jogo.equipaFora.toString('base64')+"\","+
+                    "\"golosCasa\": \""+jogo.golosCasa+"\","+
+                    "\"golosFora\": \""+jogo.golosFora+"\"},";
+            /*html+='<div>'+
                     '<img style="height:100px" src="'+ jogo.equipaCasa.toString('base64') +'"/>'+
                     '<span>'+jogo.nome+
                     '<img style="height:100px" src="'+ jogo.equipaFora.toString('base64') +'"/>'+
                     '<br/>'+
                     jogo.golosCasa.toString()+' : '+jogo.golosFora.toString()+
                     '</span>'+
-                '</div>';
+                '</div>';*/
         });
 
         cursor.on('close',function(){
-            html = '<center style="width:100%"'+
-                    '<div>'+
-                        '<b style="font-size:30px">Resultados dos Jogos Disputados Hoje'+
-                        '<br/>'+
-                        '<br/>'+
-                        html+
-                        '</b>'+
-                    '</div>'+
-                '</center>';
-            res.write(html);  
-            res.end(endPage);
+            jogos = JSON.parse(json.substr(0,json.length-1)+"]}");
+            var curuser = req.session.user;
+            req.session.jogos=jogos;
+            
+            if(curuser){
+                user = JSON.parse("{ \"user\": [{\"id\": \""+curuser.myid+"\","+
+                "\"username\": \""+curuser.username+"\","+
+                "\"pwd\": \""+curuser.pwd+"\"}]}");
+            
+                res.end(pug.renderFile('scripts/index.pug',{data:jogos,users:user}));
+            }else{
+                res.end(pug.renderFile('scripts/index.pug',{data:jogos,users:''}));
+            }
         });
-
         
     };
 

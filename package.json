@@ -4,10 +4,20 @@
   "description": "Loja de Livros",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "*",
+    "body-parser": "^1.17.2",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "debug": "^2.6.8",
+    "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "express-session": "^1.15.3",
     "mongoose": "^4.9.8",
-    "promises": "^0.2.5"
+    "morgan": "^1.8.2",
+    "passport": "^0.3.2",
+    "passport-auth0": "^0.6.0",
+    "path": "^0.12.7",
+    "promises": "^0.2.5",
+    "pug": "^2.0.0-rc.1"
   },
   "devDependencies": {},
   "scripts": {

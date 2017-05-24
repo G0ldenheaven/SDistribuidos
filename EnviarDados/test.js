@@ -7,11 +7,13 @@ var Schema = mongoose.Schema;
 var imgPath = 'C:\\Users\\Goldenheaven\\Desktop\\trab\\benfica.png';
 
 // connect to mongo
-mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
+mongoose.connect('mongodb://Goldenheaven:sdistribuidos@ds062919.mlab.com:62919/futebol');
+//mongoose.connect('mongodb://uhasoshxfidsfm3:VWT69vaueZBwHL7sO0jZ@brynr3osgrcc1g5-mongodb.services.clever-cloud.com:27017/brynr3osgrcc1g5');
 
 // example schema
 
 var schema = new Schema({
+    myid: Number,
 	nome: String,
 	equipaCasa: Buffer,
 	golosCasa: Number,
@@ -33,6 +35,7 @@ mongoose.connection.on('open', function () {
 
     // store an img in binary in mongo
     var a = new A;
+    a.myid=1;
 	a.nome = "Benfica vs Porto";
     a.equipaCasa = fs.readFileSync(imgPath);
 	a.golosCasa = 7;
