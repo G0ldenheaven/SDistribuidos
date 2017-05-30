@@ -31,8 +31,8 @@ app.get('/login', function(req, res) {
     if(user && user.length>0){    
         res.end(pug.renderFile('scripts/index.pug',{data:req.session}));
     }else{
-        //res.redirect('/callback');
-        res.end(pug.renderFile('scripts/login.pug',{data:req.session}));
+        res.redirect('/callback');
+        //res.end(pug.renderFile('scripts/login.pug',{data:req.session}));
     }
     
 });
