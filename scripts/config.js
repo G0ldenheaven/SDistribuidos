@@ -4,5 +4,5 @@ const port = process.env.port || 443;
 module.exports = {
   'url' : 'mongodb://Goldenheaven:sdistribuidos@ds062919.mlab.com:62919/futebol',
   'port' : port,
-  'ip': 'goldenheaven.azurewebsites.net'
+  'ip': '13.81.108.99'
 };
