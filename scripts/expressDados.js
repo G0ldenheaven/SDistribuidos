@@ -53,8 +53,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 
-app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/users1' }),
+app.get('/users',
+  passport.authenticate('auth0', { failureRedirect: '/' }),
   function(req, res) {
     res.redirect('/users');
 });
