@@ -70,7 +70,7 @@ app.post('/login',function(req,res){
 app.get('/callback',
   passport.authenticate('auth0', { failureRedirect: '/' }),
   function(req, res) {
-    res.redirect('/users');
+    res.send(req.user);
 });
 
 // Definir a route principal
