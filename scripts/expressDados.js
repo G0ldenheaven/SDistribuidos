@@ -56,5 +56,6 @@ app.listen(config.port,config.ip);
 
 module.exports = {
   'app': app,
-  'ensureLoggedIn': ensureLoggedIn
+  'ensureLoggedIn': ensureLoggedIn,
+  'passport',passport
 };

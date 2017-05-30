@@ -2,6 +2,7 @@ const pug = require('pug');
 const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
+const passport = require('./scripts/expressDados').passport;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const localStorage = require('./scripts/expressDados').LocalStorage;
 
