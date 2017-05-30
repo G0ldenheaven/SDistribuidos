@@ -53,16 +53,25 @@ div(class="navbar navbar-inverse nav")
                                 else
                                     li(class="dropdown")
                                         a(href="/Login") Welcome, Guest
-                                        
-block content  
-  div(id="root" style="width: 280px; margin: 40px auto; padding: 10px;")
+div.container
+    center
+        div.col-sm-6.col-sm-offset-3
 
-  script.
-    var lock = new Auth0Lock('#{process.env.AUTH0_CLIENT_ID}', '#{process.env.AUTH0_DOMAIN}', { auth: {
-          redirectUrl: '#{process.env.AUTH0_CALLBACK_URL}'
-        , responseType: 'code'
-        , params: {
-          scope: 'openid profile'
-        }
-      }});
-    lock.show();
+            h1
+                span(class="fa fa-sign-in")  Login
+
+    form(action="/login" method="post" style="width:350px;margin-left:35%")
+        div.form-group
+            label(for=username) Username: 
+            input.form-control(type="text",id="username", name="username")
+        div.form-group
+            label(for=pwd) Password: 
+            input.form-control(type="password", id="password", name="password")
+        button.btn.btn-warning.btn-lg(type="submit") Login
+
+    hr
+
+    p(style="margin-left:35%") Need an account?
+        a(href="/signup") Signup
+    p(style="margin-left:35%") Or go 
+        a(href="/") home.

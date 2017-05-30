@@ -56,10 +56,10 @@
 
         cursor.on('close',function(){
             jogos = JSON.parse(json.substr(0,json.length-1)+"]}");
-            var curuser = req.session.user;
-            req.session.jogos=jogos;
+            //var curuser = req.session.user;
+            //req.session.jogos=jogos;
             
-            if(curuser){
+            /*if(curuser){
                 user = JSON.parse("{ \"user\": [{\"id\": \""+curuser.myid+"\","+
                 "\"username\": \""+curuser.username+"\","+
                 "\"pwd\": \""+curuser.pwd+"\"}]}");
@@ -67,7 +67,8 @@
                 res.end(pug.renderFile('scripts/index.pug',{data:jogos,users:user}));
             }else{
                 res.end(pug.renderFile('scripts/index.pug',{data:jogos,users:''}));
-            }
+            }*/
+                res.end(pug.renderFile('scripts/index.pug',{data:jogos,users:''}));
         });
         
     };
