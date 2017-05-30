@@ -18,10 +18,13 @@ function VerificarAutenticacao(req,res,next){
 // Definir a route principal
 app.get('/', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
-
-    res.send(req.user);
-    //var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
+    
+    var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
 });
+
+passport.on('authenticated',function(req,res){
+    res.send(req + ' ' + res);
+}
 
 // Definir a route principal
 app.get('/login', function(req, res) {    
