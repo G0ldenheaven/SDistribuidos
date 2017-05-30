@@ -54,7 +54,7 @@ passport.deserializeUser(function(user, done) {
 
 
 app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/' }),
+  passport.authenticate('auth0', { failureRedirect: '/users1' }),
   function(req, res) {
     res.redirect(req.session.returnTo || '/users');
 });
