@@ -18,7 +18,9 @@ function VerificarAutenticacao(req,res,next){
 // Definir a route principal
 app.get('/', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
-    
+
+    if(req.user)
+    res.send(req.user);
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
 });
 
@@ -36,10 +38,6 @@ app.get('/login', function(req, res) {
         //res.end(pug.renderFile('scripts/login.pug',{data:req.session}));
     }
     
-});
-
-app.get('/logver',VerificarAutenticacao,function(req,res){
-   res.send('Esta logged!'); 
 });
 
 app.post('/login',function(req,res){
@@ -74,7 +72,7 @@ app.get('/callback',
 });
 
 // Definir a route principal
-app.get('/users',VerificarAutenticacao, function(req, res) {    
+app.get('/users', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     
