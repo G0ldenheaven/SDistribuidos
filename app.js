@@ -2,18 +2,24 @@ const pug = require('pug');
 const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
-const passport = require('./scripts/expressDados').passport;
+const lock = require('./scripts/expressDados').lock;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const localStorage = require('./scripts/expressDados').LocalStorage;
 
-
-function VerificarAutenticacao(req,res,next){
-    if(req.session && req.session.user.username.length>0){
-        next();
-    }else{
-        res.send('Não tem permissões para ver esta pagina!</br><a href="/login">Clique aqui para fazer login!</a>');
+lock.on("authenticated", function(authResult) {
+  lock.getUserInfo(authResult.accessToken, function(error, profile) {
+    if (error) {
+      // Handle error
+      return;
     }
-}
+
+    // Save token and profile locally
+    localStorage.setItem("accessToken", authResult.accessToken);
+    localStorage.setItem("profile", JSON.stringify(profile));
+
+    // Update DOM
+  });
+});
 
 // Definir a route principal
 app.get('/', function(req, res) {    

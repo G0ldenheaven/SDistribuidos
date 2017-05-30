@@ -4,6 +4,7 @@
   "description": "Loja de Livros",
   "main": "app.js",
   "dependencies": {
+    "auth0-js": "^8.7.0",
     "auth0-lock": "^10.16.0",
     "body-parser": "^1.17.2",
     "connect-ensure-login": "^0.1.1",
@@ -19,7 +20,8 @@
     "passport-auth0": "^0.6.0",
     "path": "^0.12.7",
     "promises": "^0.2.5",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
+    "webpack": "^2.6.1"
   },
   "devDependencies": {},
   "scripts": {

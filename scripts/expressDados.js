@@ -9,6 +9,13 @@ const Auth0Strategy = require('passport-auth0');
 const dotenv = require('dotenv');
 const app = express();
 
+import Auth0Lock from 'auth0-lock';
+
+const lock = new Auth0Lock(
+  'zsGj9MpKLnBZcU3BPiLJeK4sXtLXzeof',
+  'goldenheaven.eu.auth0.com'
+);
+
 dotenv.load();
 
 const strategy = new Auth0Strategy({
@@ -57,5 +64,6 @@ app.listen(config.port,config.ip);
 module.exports = {
   'app': app,
   'ensureLoggedIn': ensureLoggedIn,
-  'passport':passport
+  'passport':passport,
+  'lock':lock
 };
