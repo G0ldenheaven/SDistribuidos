@@ -69,7 +69,7 @@ app.get('/users',VerificarAutenticacao, function(req, res) {
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     var profile = JSON.parse(localStorage.getItem('profile'));
-    console.log(profile);
+    res.send(profile);
     
-    res.redirect('/');
+    //res.redirect('/');
 });
