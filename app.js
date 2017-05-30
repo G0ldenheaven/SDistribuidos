@@ -68,8 +68,8 @@ app.post('/login',function(req,res){
 app.get('/users',VerificarAutenticacao, function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
-    var profile = JSON.parse(localStorage.getItem('profile'));
-    res.send(profile);
+    
+    res.send(req.user);
     
     //res.redirect('/');
 });
