@@ -52,13 +52,6 @@ passport.deserializeUser(function(user, done) {
   done(null, user);
 });
 
-
-app.get('/users',
-  passport.authenticate('auth0', { failureRedirect: '/' }),
-  function(req, res) {
-    res.redirect('/users');
-});
-
 app.listen(config.port,config.ip);
 
 module.exports = {
