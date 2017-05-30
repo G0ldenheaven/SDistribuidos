@@ -19,9 +19,8 @@ function VerificarAutenticacao(req,res,next){
 app.get('/', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
 
-    if(req.user)
     res.send(req.user);
-    var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
+    //var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
 });
 
 // Definir a route principal
