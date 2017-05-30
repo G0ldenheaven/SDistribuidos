@@ -24,7 +24,7 @@ app.get('/', function(req, res) {
 
 passport.on('authenticated',function(req,res){
     res.send(req + ' ' + res);
-}
+});
 
 // Definir a route principal
 app.get('/login', function(req, res) {    
