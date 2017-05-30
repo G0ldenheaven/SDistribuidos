@@ -2,24 +2,9 @@ const pug = require('pug');
 const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
-const lock = require('./scripts/expressDados').lock;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const localStorage = require('./scripts/expressDados').LocalStorage;
 
-lock.on("authenticated", function(authResult) {
-  lock.getUserInfo(authResult.accessToken, function(error, profile) {
-    if (error) {
-      // Handle error
-      return;
-    }
-
-    // Save token and profile locally
-    localStorage.setItem("accessToken", authResult.accessToken);
-    localStorage.setItem("profile", JSON.stringify(profile));
-
-    // Update DOM
-  });
-});
 
 // Definir a route principal
 app.get('/', function(req, res) {    
@@ -74,7 +59,9 @@ app.post('/login',function(req,res){
 
 
 app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/' }),
+  passport.authenticate('auth0', { failureRedirect: '/', redirect:true,
+        redirectUrl: 'goldenheaven.azurewebsites.net/users',
+        responseType: 'token'}),
   function(req, res) {
     res.send(req.user);
 });
