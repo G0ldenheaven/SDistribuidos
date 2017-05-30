@@ -3,6 +3,7 @@ const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
+const localStorage = require('./scripts/expressDados').LocalStorage;
 
 
 function VerificarAutenticacao(req,res,next){
@@ -67,11 +68,8 @@ app.post('/login',function(req,res){
 app.get('/users',VerificarAutenticacao, function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
-    var user = req.session.user;
-    
-    if(!user || user.length==0) {
-        res.status(500).end('Invalid user data!');
-    }
+    var profile = JSON.parse(localStorage.getItem('profile'));
+    console.log(profile);
     
     res.redirect('/');
 });

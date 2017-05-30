@@ -6,6 +6,8 @@ const config = require('./config.js');
 const passport = require('passport');
 const ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn();
 const Auth0Strategy = require('passport-auth0');
+const Auth0Lock = require('auth0-lock');
+const localStorage = require('node-localStorage').LocalStorage;
 const dotenv = require('dotenv');
 const app = express();
 
@@ -21,6 +23,27 @@ const strategy = new Auth0Strategy({
     return done(null, profile);
 });
 
+localStorage = new LocalStorage('../localStorage');
+
+// Initiating our Auth0Lock
+var lock = new Auth0Lock(
+  'zsGj9MpKLnBZcU3BPiLJeK4sXtLXzeof',
+  'goldenheaven.eu.auth0.com'
+);
+
+// Listening for the authenticated event
+lock.on("authenticated", function(authResult) {
+  // Use the token in authResult to getUserInfo() and save it to localStorage
+  lock.getUserInfo(authResult.accessToken, function(error, profile) {
+    if (error) {
+      // Handle error
+      return;
+    }
+
+    localStorage.setItem('accessToken', authResult.accessToken);
+    localStorage.setItem('profile', JSON.stringify(profile));
+  });
+});
 
 // ssl
 app.set('trust proxy',config.ip);
@@ -63,5 +86,6 @@ app.listen(config.port,config.ip);
 
 module.exports = {
   'app': app,
-  'ensureLoggedIn':ensureLoggedIn
+  'ensureLoggedIn':ensureLoggedIn,
+  'LocalStorage':localStorage
 };
