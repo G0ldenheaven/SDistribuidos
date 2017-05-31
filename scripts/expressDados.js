@@ -35,7 +35,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(session({
     user: [],
-    secret:"sdistribuidos",
+    secret:config.clientSecret,
     saveUninitialized:true,
     resave:true,
     cookie:{
