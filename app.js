@@ -67,7 +67,7 @@ app.post('/users', function(req, res) {
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     
-    res.send(req);
+    res.send(req.session);
     
     //res.redirect('/');
 });
