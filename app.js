@@ -55,7 +55,7 @@ app.post('/login',function(req,res){
 
 
 app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/', redirect:false,
+  passport.authenticate('auth0', { failureRedirect: '/', redirect:true,
         redirectUrl: 'https://goldenheaven.azurewebsites.net/',
         responseType: 'token'}),
   function(req, res) {
@@ -67,7 +67,7 @@ app.get('/users', function(req, res) {
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     
-    res.send(req.user);
+    res.send(req);
     
     //res.redirect('/');
 });
