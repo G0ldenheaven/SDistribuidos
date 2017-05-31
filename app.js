@@ -53,17 +53,17 @@ app.post('/login',function(req,res){
     }
 });
 
-
+/*
 app.get('/callback',
   passport.authenticate('auth0', { failureRedirect: '/', redirect:true,
         redirectUrl: 'https://goldenheaven.azurewebsites.net/',
         responseType: 'token'}),
   function(req, res) {
     res.send(req.user);
-});
+});*/
 
 // Definir a route principal
-app.get('/users', function(req, res) {    
+app.post('/users', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     
