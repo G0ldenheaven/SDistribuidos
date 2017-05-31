@@ -6,7 +6,6 @@ const passport = require('./scripts/expressDados').passport;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const localStorage = require('./scripts/expressDados').LocalStorage;
 
-
 // Definir a route principal
 app.get('/', function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));

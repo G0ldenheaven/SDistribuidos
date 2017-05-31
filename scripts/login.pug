@@ -60,10 +60,22 @@ block content
 
   script.
     var lock = new Auth0Lock('#{process.env.AUTH0_CLIENT_ID}', '#{process.env.AUTH0_DOMAIN}', { auth: {
-          redirectUrl: '#{process.env.AUTH0_CALLBACK_URL}'
+          redirectUrl: '#{'goldenheaven.azurewebsites.net/users'}'
         , responseType: 'code'
         , params: {
           scope: 'openid profile'
         }
       }});
+      
+      lock.on("authenticated", function(authResult) {
+          lock.getUserInfo(authResult.accessToken, function(error, profile) {
+            if (error) {
+              // Handle error 
+              return;
+            }
+         
+            localStorage.setItem("accessToken", authResult.accessToken);
+            localStorage.setItem("profile", JSON.stringify(profile));
+          });
+        });
     lock.show();
