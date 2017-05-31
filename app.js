@@ -3,8 +3,14 @@ const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
 const passport = require('./scripts/expressDados').passport;
+const strategy = require('./scripts/expressDados').strategy;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
-const localStorage = require('./scripts/expressDados').LocalStorage;
+const jwt = require('express-jwt');
+
+var authCheck = jwt({
+      secret: new Buffer(config.clientSecret, 'base64'),
+      audience: config.clientId
+});
 
 // Definir a route principal
 app.get('/', function(req, res) {    
@@ -63,11 +69,9 @@ app.get('/callback',
 });*/
 
 // Definir a route principal
-app.post('/users', function(req, res) {    
+app.post('/users', authCheck, function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
-    
-    res.send(req.session);
-    
+    res.end(req.user.email);
     //res.redirect('/');
 });

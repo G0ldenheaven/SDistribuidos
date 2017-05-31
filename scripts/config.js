@@ -6,5 +6,6 @@ module.exports = {
   'port' : port,
   'ip': '13.81.108.99',
   'clientId': 'zsGj9MpKLnBZcU3BPiLJeK4sXtLXzeof',
+  'clientSecret': '_Vku0atp3Bm9W9AZg-p4bWzDx2AEnlZ1vcFut6ZBhhdkjihyB6uoBR3CMQlu6OOX',
   'domain' : 'goldenheaven.eu.auth0.com'
 };

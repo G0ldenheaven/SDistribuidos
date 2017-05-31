@@ -61,9 +61,10 @@ block content
   script.
     var lock = new Auth0Lock('#{process.env.AUTH0_CLIENT_ID}', '#{process.env.AUTH0_DOMAIN}', { auth: {
           redirectUrl: '#{'https://goldenheaven.azurewebsites.net/users'}'
+          //13.81.108.99
         , responseMode: 'form_post'
         , params: {
-          scope: 'openid profile'
+          scope: 'openid profile username'
         }
       }});
       
