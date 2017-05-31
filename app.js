@@ -57,7 +57,7 @@ app.post('/login',function(req,res){
 
 app.get('/callback',
   passport.authenticate('auth0', { failureRedirect: '/', redirect:true,
-        redirectUrl: 'goldenheaven.azurewebsites.net/users',
+        redirectUrl: 'https://goldenheaven.azurewebsites.net/users',
         responseType: 'token'}),
   function(req, res) {
     res.send(req.user);
