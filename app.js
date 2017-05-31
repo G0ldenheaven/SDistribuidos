@@ -2,6 +2,7 @@ const pug = require('pug');
 const config = require('./scripts/config.js');
 const db = require('./scripts/db.js');
 const app = require('./scripts/expressDados').app;
+const passport = require('./scripts/expressDados').passport;
 const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const localStorage = require('./scripts/expressDados').LocalStorage;
 
@@ -11,10 +12,6 @@ app.get('/', function(req, res) {
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
     var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
-});
-
-passport.on('authenticated',function(req,res){
-    res.send(req + ' ' + res);
 });
 
 // Definir a route principal
