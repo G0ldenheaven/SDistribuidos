@@ -8,7 +8,7 @@ const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
 const jwt = require('express-jwt');
 
 var authCheck = jwt({
-      secret: new Buffer(config.clientSecret, 'base64'),
+      secret: config.clientSecret,
       audience: config.clientId
 });
 
@@ -72,6 +72,6 @@ app.get('/callback',
 app.post('/users', authCheck, function(req, res) {    
     db.dbObj.on('error', console.error.bind(console, 'connection error:'));
     
-    res.end(req.user.email);
+    res.end(req.profile.email);
     //res.redirect('/');
 });

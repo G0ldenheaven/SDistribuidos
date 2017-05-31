@@ -12,9 +12,9 @@ const app = express();
 dotenv.load();
 
 const strategy = new Auth0Strategy({
-    domain:       process.env.AUTH0_DOMAIN,
-    clientID:     process.env.AUTH0_CLIENT_ID,
-    clientSecret: process.env.AUTH0_CLIENT_SECRET,
+    domain:       config.domain,
+    clientID:     config.clientId,
+    clientSecret: config.clientSecret,
     callbackURL:  process.env.AUTH0_CALLBACK_URL
   }, function(accessToken, refreshToken, extraParams, profile, done) {
     // profile has all the information from the user
