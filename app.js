@@ -35,9 +35,9 @@ app.get('/login', function(req,res){
 });
 
 app.post('/login',                                                          //
-    passport.authenticate('local-login',{                                   //
-    successRedirect: '/profile',                                            //
-    failureRedirect: '/login'                                               //
+    passport.authenticate('local-login',{
+        successRedirect: '/profileRedir',
+        failureRedirect: '/login'                                           //
 }));                                                                        //
 
 
@@ -48,19 +48,26 @@ app.get('/signup',function(req,res){                                        //
 
 app.post('/signup',                                                         //
     passport.authenticate('local-signup',{                                  //
-    successRedirect: '/profile',                                            //
-    failureRedirect: '/login'                                               //
+        successRedirect: '/profile',                                        //
+        failureRedirect: '/login'                                           //
 }));                                                                        //
 
 
-app.get('/profile',isLoggedIn, function(req, res) {                         //    
-    res.render('profile',{user:req.user});                                  //
+app.get('/profile',isLoggedIn, function(req, res) {                         // 
+        res.render('profile',{user:req.user});                              //
+});                                                                         //
+
+app.get('/profileRedir',isLoggedIn, function(req, res) {                    // 
+    if(req.user.admin==true)
+        res.redirect('/backoffice');                                        //
+    else
+        res.redirect('/profile');                                           //
 });                                                                         //
 
 
-app.get('/backoffice',isLoggedIn, function(req, res) {                         //    
-    res.render('backoffice',{user:req.user});                                  //
-});                                                                            //
+app.get('/backoffice',isLoggedIn, function(req, res) {                      //
+    res.render('backoffice',{user:req.user});                               //
+});                                                                         //
 
 
 app.get('/logout', function(req, res) {                                     //
