@@ -1,0 +1,40 @@
+.dropdown-menu {
+    display:none;
+    margin-top:0px;
+}
+
+.dropdown:hover .dropdown-menu {
+    display:block;
+}
+
+.dropdown-menu:hover {
+    display:block;
+}
+
+.dropdown-open {
+    cursor:pointer;
+}
+
+.caret {
+    display: inline-block !important;
+    width: 0;
+    height: 0;
+    vertical-align: text-top;
+    border-top: 4px solid #999;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}
+
+.icon-white{
+    color:white;
+}
+
+.caret:hover {
+    display: inline-block !important;
+    width: 0;
+    height: 0;
+    vertical-align: text-top;
+    border-top: 4px solid #FFF;
+    border-right: 4px solid transparent;
+    border-left: 4px solid transparent;
+}

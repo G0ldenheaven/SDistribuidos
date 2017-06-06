@@ -1,77 +1,88 @@
-const pug = require('pug');
-const config = require('./scripts/config.js');
-const db = require('./scripts/db.js');
-const app = require('./scripts/expressDados').app;
-const passport = require('./scripts/expressDados').passport;
-const strategy = require('./scripts/expressDados').strategy;
-const ensureLoggedIn = require('./scripts/expressDados').ensureLoggedIn;
-const jwt = require('express-jwt');
+const config    = require('./assets/scripts/config');                       // Ficheiro onde guardamos 
+                                                                            // informações que são bastante
+                                                                            // reutilizaveis.
+                                                                            
+const db        = require('./assets/scripts/db');                           // Ficheiro onde guardamos tudo 
+                                                                            // que tem a ver com a base de 
+                                                                            // dados mongodb.
+                                                                            
+const app       = require('./assets/scripts/expressDados').app;             // Objecto app que contem as 
+                                                                            // funçoes do express ja config.
+                                                                            
+const passport  = require('./assets/scripts/expressDados').passport;        // middleware de autenticaçao para
+                                                                            // o node ja configurado.
+                                                                            
+function isLoggedIn(req, res, next) {                                       // Função que permite garantir que 
+                                                                            // o utilizador esta autenticado.
 
-var authCheck = jwt({
-      secret: config.clientSecret,
-      audience: config.clientId
+    if (req.isAuthenticated())                                              // Se estiver autenticado corre a
+        return next();                                                      // proxima função
+
+    res.redirect('/');                                                      // Senao redireciona para a pagina
+}                                                                           // principal
+
+                                                                            // Define a route principal, ou
+                                                                            // seja, a pagina que ira ser 
+                                                                            // mostrada ao utilizador ao 
+app.get('/', function(req, res) {                                           // entrar no url
+    db.getAllGames(function(jogos){
+        res.render('index.pug',{jogos:jogos,user:req.user});
+    });
 });
 
-// Definir a route principal
-app.get('/', function(req, res) {    
-    db.dbObj.on('error', console.error.bind(console, 'connection error:'));
-    
-    var getJogos = require('./scripts/htmlContent.js').getMainPageContent(req,res,pug,db.Futebol);
+app.get('/login', function(req,res){
+    res.render('login');
 });
 
-// Definir a route principal
-app.get('/login', function(req, res) {    
-    db.dbObj.on('error', console.error.bind(console, 'connection error:'));
-    
-    var user = req.session.user;
-    
-    
-    if(user && user.length>0){    
-        res.end(pug.renderFile('scripts/index.pug',{data:req.session}));
-    }else{
-        //res.redirect('/callback');
-        res.end(pug.renderFile('scripts/login.pug',{data:req.session}));
-    }
-    
-});
+app.post('/login',                                                          //
+    passport.authenticate('local-login',{                                   //
+    successRedirect: '/profile',                                            //
+    failureRedirect: '/login'                                               //
+}));                                                                        //
 
-app.post('/login',function(req,res){
-    var username = req.body.username;
-    var password = req.body.password;
 
-    var user = req.session.user;
+app.get('/signup',function(req,res){                                        //
+    res.render('signup');                                                   //
+});                                                                         //
 
-    if(!user || user.length==0){
+
+app.post('/signup',                                                         //
+    passport.authenticate('local-signup',{                                  //
+    successRedirect: '/profile',                                            //
+    failureRedirect: '/login'                                               //
+}));                                                                        //
+
+
+app.get('/profile',isLoggedIn, function(req, res) {                         //    
+    res.render('profile',{user:req.user});                                  //
+});                                                                         //
+
+
+app.get('/backoffice',isLoggedIn, function(req, res) {                         //    
+    res.render('backoffice',{user:req.user});                                  //
+});                                                                            //
+
+
+app.get('/logout', function(req, res) {                                     //
+    req.logout();                                                           //
+    res.redirect('/');                                                      //
+});                                                                         //
+
+
+app.put('/profile',isLoggedIn, function(req, res) {                         // Pagina de perfil do user actual
+
+    var profile = req.body.profile;                                         // Perfil do utilizador que e
+                                                                            // recebido no body e enviado pelo
+                                                                            // formulario na pagina profile
+
+    var userid = req.user._id;
     
-        var uCursor = db.UserList.findOne({username:username,password:password}).exec(function(err, data) {
-            if (err) return done(err);
-            
-            if(data==null) {
-                res.status(500).send('Dados Invalidos. Se não possui uma conta <a href="/signup">clique aqui</a>  para criar uma!'+
-                '<br/><a href="#" onclick="javascript:history.back();">Clique aqui</a> para voltar a pagina principal!');
-            }else{
-                req.session.user=data;
-                res.redirect('/users');
-            }
-        });
-    }else{
-        res.end(pug.renderFile('scripts/index.pug',{data:req.session}));
-    }
-});
+    db.updateUser(userid,profile);
+});                                                                         //
 
-/*
-app.get('/callback',
-  passport.authenticate('auth0', { failureRedirect: '/', redirect:true,
-        redirectUrl: 'https://goldenheaven.azurewebsites.net/',
-        responseType: 'token'}),
-  function(req, res) {
-    res.send(req.user);
-});*/
 
-// Definir a route principal
-app.post('/users', authCheck, function(req, res) {    
-    db.dbObj.on('error', console.error.bind(console, 'connection error:'));
-    
-    res.end(req.profile.email);
-    //res.redirect('/');
-});
+app.delete('/users',isLoggedIn, function(req, res) {                        //
+    console.log(req.body.picurl);
+    res.end();
+    //res.render('users',{user:req.user});                                  //
+});                                                                         //

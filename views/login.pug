@@ -1,0 +1,32 @@
+doctype html
+html(lang="en")
+head
+    meta(charset="utf-8")
+    title='Log In - Pplware'
+    meta(name="viewport",content="width=device-width, initial-scale=1")
+    block styles
+        link(href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",rel="stylesheet")
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
+        style
+            include ../assets/css/login.css
+body(style="background-color:#222;color:#fff;")
+div(class="container", style="padding-top: 80px;text-align:center;width:500px;")
+    form(action="/login",class="form-horizontal", method="post")
+         div(class="col-md-8 col-sm-6 col-xs-12 personal-info")
+            img(src="http://rawgit.com/start-angular/SB-Admin-BS4-Angular-4/master/dist/assets/images/logo.png",class="login-page user-avatar",width="150px")
+            br
+            br
+            h3 NewsSports
+            div(class="form-content")
+                div(class="form-group")
+                    input(class="form-control input-underline input-lg", placeholder="Username", name="username", type="text")
+                div(class="form-group")
+                    input(class="form-control input-underline input-lg", placeholder="Password", type="password",name="password")
+                br
+                div(class="form-group")
+                    div(class="col-md-8",style="display:inline-block")
+                        input(class="btn rounded-btn", value="Log In", type="submit")
+                        span &nbsp;&nbsp;&nbsp;
+                        a(class="btn rounded-btn",href="/signup") Register
+                        br
+                        a(class="btn home-btn",href="/") Home

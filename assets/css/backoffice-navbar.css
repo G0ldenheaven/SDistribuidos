@@ -1,0 +1,53 @@
+.sidenavbar {
+    position:absolute;
+    background-color:rgb(34,34,34);
+    width:250px;
+    height:100%;
+    float:left;
+    text-align:center;
+    padding-top:5px;
+    margin:0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.sidenavlist {
+    list-style:none;
+    position:relative;
+}
+
+.sidenavldiv{
+    height:30px;
+    background-color:rgb(34,34,34);
+    left: -30px;
+}
+
+.sidenavlitem {
+    position:relative;
+    vertical-align:middle;
+    color:white;
+    line-height:30px;
+}
+
+.menulink{
+    text-decoration : none;
+    color:#ccc;
+    width: 253.3px;
+}
+
+.menulink:hover {
+    text-decoration : none;
+    color:white;
+    width: 253.3px;
+}
+
+.sidenavldiv:hover,
+.sidenavldiv:hover a {
+    width: 253.3px;
+    position: relative;
+    text-align:center;
+    height:30px;
+    background-color:rgb(64,64,64);
+    cursor:pointer;
+    text-decoration : none;
+    color:white;
+}
