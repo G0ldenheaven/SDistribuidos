@@ -1,59 +1,6 @@
-doctype html
-html(lang="en")
-head
-    meta(charset="utf-8")
-    title='Futebol - Pplware'
-    meta(name="viewport",content="width=device-width, initial-scale=1")
-    block styles
-        link(href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",rel="stylesheet")
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-        style
-            include ../assets/css/navbar.css
-body(style="width:100%")
-    div(class="navbar navbar-inverse nav")
-        div(class="navbar-inner")
-            div(class="container")
-                a(class="btn btn-navbar",data-toggle="collapse",data-target=".nav-collapse")
-                    span(class="icon-bar")
-                    span(class="icon-bar")
-                    span(class="icon-bar")
-                a(class="brand",href="/") NewsSports
-                div(class="nav-collapse collapse")
-                    ul(class="nav")
-                        li(class="divider-vertical")
-                        li(style="width:90px;margin-left:-11px",class="divider-vertical")
-                            a(href="/")
-                                i(class="icon-home icon-white") 
-                                p(style="padding-left:20px;margin-top:-20px;font-style:normal;") Home
-                        if(user && user.admin == true)
-                            li(style="width:120px;margin-left:-11px",class="divider-vertical")
-                                a(href="/backoffice")
-                                    i(class="fa fa-user-secret icon-white",style="font-style:normal;",aria-hidden="true")
-                                    p(style="padding-left:20px;margin-right:10px;margin-top:-20px;font-style:normal;") BackOffice
-                    div(class="pull-right")
-                        ul(class="nav pull-right")
-                            if(user)
-                                li(class="dropdown")
-                                    a(class="dropdown-open") Welcome, #{user.firstName+" "+user.lastName}
-                                        b(class="caret")
-                                    ul(class="dropdown-menu")
-                                        li(style="margin-top: -5px;")
-                                            a(href="/profile",style="height:23px")
-                                                i(class="icon-cog")
-                                                p(style="padding-left:18px;top:8px;position:absolute;font-style:normal;") Control Panel
-                                        li(style="margin-bottom: -5px;")
-                                            a(href="/help/support",style="height:23px")
-                                                i(class="icon-envelope")
-                                                p(style="padding-left:18px;top:-20px;position:relative;font-style:normal;") Contact Support
-                                        li(class="divider")
-                                        li(style="margin-top: -10px;margin-bottom: -5px;")
-                                            a(href="/logout",style="height:23px")
-                                                i(class="icon-off")
-                                                p(style="padding-left:18px;top:-20px;position:relative;font-style:normal;") Logout
-                            else
-                                li(class="dropdown")
-                                    a(href="/Login") Welcome, Guest
+extends navbar
 
+append content
     div(style="margin-top:-100px;")
         center .
         if(jogos)

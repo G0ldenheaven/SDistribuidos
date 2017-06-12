@@ -1,3 +1,8 @@
+body{
+    font-family: 'Roboto', sans-serif;
+    src: url("https://fonts.googleapis.com/css?family=Roboto");
+}
+
 .login-page {
     margin-top:-20px;
     color: #fff;
@@ -53,19 +58,20 @@
 }
 
 .home-btn{
-    -webkit-border-radius: 50px !important;
-    border-radius: 50px !important;
+    -webkit-border-radius: 100px !important;
+    border-radius: 100px !important;
     color: rgba(255,255,255,0.8) !important;
     background: #222 !important;
     border: 2px solid rgba(255,255,255,0.8) !important;
     font-size: 18px !important;
     line-height: 40px !important;
-    padding: 0 25px !important;
     text-shadow:0 0px !important;
     font-weight:normal !important;
+    padding:0 15px !important;
     position:absolute;
     margin-left:-56px;
-    bottom:100px;
+    top:10px;
+    right:10px;
 }
 
 .home-btn:hover,.home-btn:focus,.home-btn:active,.home-btn:visited{

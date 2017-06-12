@@ -26,42 +26,30 @@ function isLoggedIn(req, res, next) {                                       // F
                                                                             // mostrada ao utilizador ao 
 app.get('/', function(req, res) {                                           // entrar no url
     db.getAllGames(function(jogos){
-        res.render('index.pug',{jogos:jogos,user:req.user});
+        res.render('index',{jogos:jogos,user:req.user});
     });
 });
+
 
 app.get('/login', function(req,res){
     res.render('login');
 });
 
-app.post('/login',                                                          //
-    passport.authenticate('local-login',{
-        successRedirect: '/profileRedir',
-        failureRedirect: '/login'                                           //
-}));                                                                        //
-
 
 app.get('/signup',function(req,res){                                        //
     res.render('signup');                                                   //
-});                                                                         //
+}); 
 
 
-app.post('/signup',                                                         //
-    passport.authenticate('local-signup',{                                  //
-        successRedirect: '/profile',                                        //
-        failureRedirect: '/login'                                           //
-}));                                                                        //
-
-
-app.get('/profile',isLoggedIn, function(req, res) {                         // 
-        res.render('profile',{user:req.user});                              //
+app.get('/profile',isLoggedIn, function(req, res) {                         //
+    res.render('profile',{user:req.user});                                  //
 });                                                                         //
 
 app.get('/profileRedir',isLoggedIn, function(req, res) {                    // 
     if(req.user.admin==true)
         res.redirect('/backoffice');                                        //
     else
-        res.redirect('/profile');                                           //
+        res.redirect('/');                                                  //
 });                                                                         //
 
 
@@ -73,7 +61,28 @@ app.get('/backoffice',isLoggedIn, function(req, res) {                      //
 app.get('/logout', function(req, res) {                                     //
     req.logout();                                                           //
     res.redirect('/');                                                      //
-});                                                                         //
+});     
+
+
+app.get('/users',isLoggedIn, function(req, res) {                           //
+    db.getAllGames(function(jogos){
+        res.render('users',{jogos:jogos,user:req.user});
+    });
+});
+
+
+app.post('/login',                                                          //
+    passport.authenticate('local-login',{
+        successRedirect: '/profileRedir',
+        failureRedirect: '/login'                                           //
+}));                                                                        //
+
+
+app.post('/signup',                                                         //
+    passport.authenticate('local-signup',{                                  //
+        successRedirect: '/profile',                                        //
+        failureRedirect: '/login'                                           //
+}));                                                                        //
 
 
 app.put('/profile',isLoggedIn, function(req, res) {                         // Pagina de perfil do user actual
@@ -89,7 +98,5 @@ app.put('/profile',isLoggedIn, function(req, res) {                         // P
 
 
 app.delete('/users',isLoggedIn, function(req, res) {                        //
-    console.log(req.body.picurl);
-    res.end();
-    //res.render('users',{user:req.user});                                  //
+    
 });                                                                         //

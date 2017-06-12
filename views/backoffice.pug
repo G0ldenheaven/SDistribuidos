@@ -1,35 +1,16 @@
-doctype html
-html(lang="en")
-head
-    meta(charset="utf-8")
-    title='BackOffice - Pplware'
-    meta(name="viewport",content="width=device-width, initial-scale=1")
-    block styles
-        link(href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",rel="stylesheet")
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-        style
-            include ../assets/css/backoffice-navbar.css
-body(style="width:100%")
-    div(class="sidenavbar")
-        ul(class="sidenavlist")
-            div
-                li
-                    i(class="icon-home icon-white") 
-                    a(href="/",class="menulink")  NewsSports
-            br
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="icon-user icon-white") 
-                    a(href="/profile",class="menulink")  Profile
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="icon-user icon-white") 
-                    a(href="/users",class="menulink")  Manage Users
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="fa fa-gamepad icon-white") 
-                    a(href="/games",class="menulink")  Manage Games
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="icon-off icon-white") 
-                    a(href="/logout",class="menulink")  Logout
+extends boffice
+
+append content
+    div(style="position: absolute;left:38%")
+        h1 Wellcome to Back Office, #{user.firstName} #{user.lastName}
+        br
+        img(id="procpic",src=user.picurl || 'https://openclipart.org/download/247319/abstract-user-flat-3.svg', class="avatar img-circle img-thumbnail", alt="avatar", style="height:150px;width:150px;margin-left:190px;border:5px solid;")
+        br
+        br
+        br
+        br
+        div(style="margin-left:50px")
+            p In Profile, you will be able to view, edit or delete your account.
+            p In Manage Users, you will be able to view, add, edit or delete users.
+            p In Manage Games, you will be able to view, add, edit or delete all games.
+            p In logout you will be signed out of your account.

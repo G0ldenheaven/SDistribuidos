@@ -1,13 +1,24 @@
-.sidenavbar {
+body{
+    font-family: 'Roboto', sans-serif;
+    src: url("https://fonts.googleapis.com/css?family=Roboto");
+    height:100% !important;
+    width:100% !important;
     position:absolute;
-    background-color:rgb(34,34,34);
-    width:250px;
-    height:100%;
-    float:left;
-    text-align:justify;
-    padding-top:5px;
-    margin:0;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    overflow-x:hidden;
+    top:0;
+}
+
+.sidenavbar {
+    position:absolute !important;
+    background-color:rgb(34,34,34) !important;
+    width:250px !important;
+    height:100% !important;
+    float:left !important;
+    text-align:justify !important;
+    padding-top:5px !important;
+    margin:0 !important;
+    top:0;
+    bottom:0;
 }
 
 .sidenavlist {
@@ -50,4 +61,8 @@
     cursor:pointer;
     text-decoration : none;
     color:white;
+}
+
+#content {
+    overflow-y:scroll !important;
 }

@@ -118,7 +118,8 @@ var getAllGames = function getAllGames(callback){                       // Objec
     json = "{ \"jogos\": [";
     
     cursor.on('data', function(jogo){
-        json+= "{ \"equipaCasa\": \""+jogo.equipaCasa+"\","+
+        json+= "{ \"id\": \""+jogo._id+"\","+
+                "\"equipaCasa\": \""+jogo.equipaCasa+"\","+
                 "\"nome\": \""+jogo.nome+"\","+
                 "\"equipaFora\": \""+jogo.equipaFora+"\","+
                 "\"golosCasa\": \""+jogo.golosCasa+"\","+
