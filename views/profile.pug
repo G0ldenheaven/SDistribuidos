@@ -11,7 +11,7 @@ append content
                 div(style="position:relative;margin-left:40px")
                     img(id="procpic",src=user.picurl || 'https://openclipart.org/download/247319/abstract-user-flat-3.svg', class="avatar img-circle img-thumbnail", alt="avatar", style="height:150px;width:150px;margin-left:190px")
         br
-        form(action="/profile",class="form-horizontal", method="post", id="userprof")
+        form(action="/profile/"+user.username,class="form-horizontal", method="post", id="userprof")
             div(class="form-group")
             label(class="col-lg-3 control-label") Enter Url: 
             div(class="col-lg-8")
