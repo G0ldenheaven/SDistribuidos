@@ -36,7 +36,7 @@ body(class="container",style="width:100% !important;")
                             ul(class="nav pull-right")
                                 if(user)
                                     i(class="fa fa-user icon-white",style="float:left;margin-top:12px;")
-                                    li(class="dropdown",data-toggle="dropdown")
+                                    li(class="dropdown")
                                         if(user.username == viewer.username)
                                             a(class="dropdown-open") #{(user.firstName || "New")+" "+(user.lastName || "User")}
                                                 b(class="caret")
@@ -60,7 +60,6 @@ body(class="container",style="width:100% !important;")
                                 else
                                     i(class="fa fa-user icon-white",style="float:left;margin-top:12px;")
                                     li(class="dropdown")
-                                        a(class="dropdown-toggle",data-toggle="dropdown",href="/Login") Login
-                                        ul(class="dropdown-menu")
+                                        a(href="/Login") Login
     block content
     block bscripts
