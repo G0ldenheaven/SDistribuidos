@@ -4,8 +4,6 @@ const session       = require('express-session');       // Gere as sessoes para 
 
 const cookieParser  = require('cookie-parser');         // Faz parse ao cabeçalho das cookies e gera
                                                         // um objecto req.cookies com valores das cookies.
-                                                        
-const bodyParser    = require('body-parser');           // middleware para fazer parse ao corpo do request.
 
 const flash         = require('connect-flash');         // middleware que usa uma parte da sessao para
                                                         // guardar mensagens.
@@ -14,9 +12,6 @@ const passport      = require('passport');              // middleware de autenti
 
 const config        = require('./config');              // Ficheiro onde guardamos informações que são
                                                         // bastante reutilizaveis.
-                                                        
-const path          = require('path');                  // É o modulo usado para trabalhar com caminhos e
-                                                        // pastas.
                                                         
 const db            = require('./db');                  // Ficheiro onde guardamos tudo que tem a ver
                                                         // com a base de dados mongodb
@@ -34,11 +29,11 @@ app.set('view engine','pug');                           // A usar pug anteriorme
 app.use(cookieParser());                                // Inicializar cookieParser para obter as
                                                         // cookies com req.cookies.
 
-app.use(bodyParser.urlencoded({ extended: true }));     // inicializar o bodyParser para obter os codificados
+app.use(express.urlencoded({ extended: true }));     // inicializar o bodyParser para obter os codificados
                                                         // dados de post vindos de um form atraves
                                                         // do objecto req.body.{variavel}.
 
-app.use(bodyParser.json());                             // Indicamos que queremos o body sob forma de json
+app.use(express.json());                             // Indicamos que queremos o body sob forma de json
 
 app.use(session({ 
     secret:config.clientSecret,                         // A usar o clientSecret do auth0 como segredo
