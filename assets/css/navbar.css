@@ -11,6 +11,12 @@ body{
     text-align:justify;
 }
 
+#navbarwidth{
+    width:100%;
+    position:absolute;
+    left:0;
+}
+
 .dropdown:hover .dropdown-menu {
     display:block;
 }
