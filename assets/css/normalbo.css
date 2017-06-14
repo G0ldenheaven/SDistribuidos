@@ -1,0 +1,18 @@
+.rounded-btn:hover,.rounded-btn:focus,.rounded-btn:active,.rounded-btn:visited{
+    color: #444 !important;
+    border: 2px solid #444 !important;
+    outline: none !important;
+}
+
+.rounded-btn{
+    -webkit-border-radius: 50px !important;
+    border-radius: 50px !important;
+    color: #222 !important;
+    background: white !important;
+    border: 2px solid #222 !important;
+    font-size: 18px !important;
+    line-height: 40px !important;
+    padding: 0 25px !important;
+    text-shadow:0 0px !important;
+    font-weight:normal !important;
+}

@@ -80,6 +80,22 @@ $("#userprof").submit(function(event) {
     });
 });
 
+function delform(id){
+    // Se o butao save for carregado, o jquery usara o ajax para enviar um request do tipo delete para /profile/:id
+    // Desta forma iremos obter os dados a actualizar em app.js na função app.delete('/profile/:id') e  id
+    // valores estarão accessiveis atraves do req.body
+    $.ajax({
+        url: '/profile/'+id,
+        type: 'DELETE',             // Tipo de request a enviar
+        cache:false,                // Não guarda em cache os valores para aumentar a performance
+        
+        // Caso ocorra algum erro iremos executar a função abaixo e obter um log do erro na consola.
+        error: function (xhr, status, error) {
+            console.log('Error: ' + error.message);
+        }
+    });
+}
+
 // Obtem o input do tipo reset e altera o seu evento on click
 $("input[type='reset']").on("click",function(event) {
     

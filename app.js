@@ -188,6 +188,11 @@ app.delete('/users/:id',isLoggedIn, function(req, res) {                        
 });                                                                         //
 
 
+app.delete('/profile/:id',isLoggedIn, function(req, res) {                        //
+    var id = req.params.id;
+    db.deleteUser(id);
+});                                                                         //
+
 
 app.delete('/games/:id',isLoggedIn, function(req, res) {                        //
     var id = req.params.id;
