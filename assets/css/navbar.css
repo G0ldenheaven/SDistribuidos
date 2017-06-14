@@ -12,9 +12,10 @@ body{
 }
 
 #navbarwidth{
-    width:100%;
+    width:100% !important;
     position:absolute;
-    left:0;
+    left:0 !important;
+    right:0 !important;
 }
 
 .dropdown:hover .dropdown-menu {
