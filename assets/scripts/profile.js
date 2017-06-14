@@ -56,7 +56,7 @@ $("#userprof").submit(function(event) {
     // Desta forma iremos obter os dados a actualizar em app.js na função app.put('/profile') e os seus
     // valores estarão accessiveis atraves do req.body
     $.ajax({
-        url: '/profile/'user.id,
+        url: '/profile/'+user.id,
         data: {
         'profile':{
             'username':username,
