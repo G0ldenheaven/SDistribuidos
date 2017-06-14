@@ -1,31 +1,50 @@
-doctype html
-html(lang="en")
-head
-    meta(charset="utf-8")
-    title='BackOffice - Pplware'
-    meta(name="viewport",content="width=device-width, initial-scale=1")
-    block styles
-        link(href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css",rel="stylesheet")
-        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css')
-        style
-            include ../assets/css/backoffice-navbar.css
-body(style="width:100%")
-    div(class="sidenavbar")
-        ul(class="sidenavlist")
-            div
-                li
-                    i(class="icon-home icon-white") 
-                    a(href="/",class="menulink") NewsSports
-            br
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="icon-user icon-white") 
-                    a(href="/profile",class="menulink") Profile
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="icon-user icon-white") 
-                    a(href="/users",class="menulink") Manage Users
-            div(class="sidenavldiv")
-                li(class="sidenavlitem")
-                    i(class="fa fa-gamepad icon-white") 
-                    a(href="/games",class="menulink")  Manage Games
+extends navbar
+
+append styles
+    style.
+        .rounded-btn:hover,.rounded-btn:focus,.rounded-btn:active,.rounded-btn:visited{
+            color: #444 !important;
+            border: 2px solid #444 !important;
+            outline: none !important;
+        }
+        
+        .rounded-btn{
+            -webkit-border-radius: 50px !important;
+            border-radius: 50px !important;
+            color: #222 !important;
+            background: white !important;
+            border: 2px solid #222 !important;
+            font-size: 18px !important;
+            line-height: 40px !important;
+            padding: 0 25px !important;
+            text-shadow:0 0px !important;
+            font-weight:normal !important;
+        }
+append scripts
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+
+append content
+        a(class="btn rounded-btn",href="/games/add",style="position: absolute;right: 10px;top: 50px;") Add Jogo
+        div(style="margin-top:80px;")
+            center
+                if(jogos)
+                    each jogo in jogos
+                        each dados in jogo
+                            - var jg = dados;
+                            div(style="margin-top:20px;padding-left:25%;text-align:justify;border-bottom:1px solid;width:100%;")
+                                form(action="/signup", method="post", id="jogosForm"+jg.id)
+                                    label Imagem Casa:&emsp;&nbsp;&nbsp;
+                                        input(placeholder="Imagem Casa", name="imgcasa", type="text",value=jg.equipaCasa,style="margin-right:25px;")
+                                        | Imagem Fora:&emsp;
+                                        input(placeholder="Imagem Fora", name="imgfora", type="text",value=jg.equipaFora,style="margin-right:80px;")
+                                        | Nome do Jogo:&emsp;
+                                        input(placeholder="Nome do Jogo", name="njogo", type="text",value=jg.nome,style="margin-right:25px;")
+                                    label Golos Casa:&emsp;&emsp;&nbsp;&nbsp;
+                                        input(placeholder="Golos Casa", name="gcasa", type="text",value=jg.golosCasa,style="margin-right:25px;")
+                                        | Golos Fora:&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        input(placeholder="Golos Fora", name="gfora", type="text",value=jg.golosFora,style="margin-right:80px;")
+                                        a(class="btn rounded-btn",onClick='subform("'+jg.id+'")') Save
+                                        span &emsp;&emsp;
+                                        a(class="btn rounded-btn",onClick='delform("'+jg.id+'")') Delete
+        script
+            include ../assets/scripts/games.js

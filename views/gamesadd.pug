@@ -1,0 +1,47 @@
+extends navbar
+
+append styles
+    style.
+        .rounded-btn:hover,.rounded-btn:focus,.rounded-btn:active,.rounded-btn:visited{
+            color: #444 !important;
+            border: 2px solid #444 !important;
+            outline: none !important;
+        }
+        
+        .rounded-btn{
+            -webkit-border-radius: 50px !important;
+            border-radius: 50px !important;
+            color: #222 !important;
+            background: white !important;
+            border: 2px solid #222 !important;
+            font-size: 18px !important;
+            line-height: 40px !important;
+            padding: 0 25px !important;
+            text-shadow:0 0px !important;
+            font-weight:normal !important;
+        }
+append scripts
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+
+append content
+        a(class="btn rounded-btn",href="/games/add",style="position: absolute;right: 10px;top: 50px;") Add Jogo
+        div(style="margin-top:80px;")
+            center
+                div(style="margin-top:20px;padding-left:25%;text-align:justify;width:100%;")
+                    form(action="/games/addgame", method="post", id="jogosForm")
+                        label Imagem Casa:&emsp;&nbsp;&nbsp;
+                            input(placeholder="Equipa Casa", name="equipaCasa", type="text",style="margin-right:25px;")
+                        p Imagem Fora:&emsp;&nbsp;&nbsp;&nbsp;
+                            input(placeholder="Equipa Fora", name="equipaFora", type="text",style="margin-right:80px;")
+                        p Nome do Jogo:&emsp;
+                            input(placeholder="Nome do Jogo", name="njogo", type="text",style="margin-right:25px;")
+                        label Golos Casa:&emsp;&emsp;&nbsp;&nbsp;
+                            input(placeholder="Golos Casa", name="gcasa", type="text",style="margin-right:25px;")
+                        p Golos Fora:&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                            input(placeholder="Golos Fora", name="gfora", type="text",style="margin-right:80px;")
+                        br
+                        input(class="btn rounded-btn",value="Save",type="submit")
+                        span &emsp;
+                        input(class="btn rounded-btn",value="Reset",type="reset")
+                        span &emsp;
+                        a(class="btn rounded-btn",href="javascript:history.back()") Go Back

@@ -37,13 +37,17 @@ body(style="width:100%")
                                 if(user)
                                     i(class="fa fa-user icon-white",style="float:left;margin-top:12px;")
                                     li(class="dropdown")
-                                        a(class="dropdown-open") #{user.firstName+" "+user.lastName}
-                                            b(class="caret")
+                                        if(user.username == viewer.username)
+                                            a(class="dropdown-open") #{(user.firstName || "New")+" "+(user.lastName || "User")}
+                                                b(class="caret")
+                                        else
+                                            a(class="dropdown-open") Viewing #{(user.firstName || "New")+" "+(user.lastName || "User")}'s profile
+                                                b(class="caret")
                                         ul(class="dropdown-menu")
                                             li(style="margin-top: -5px;")
-                                                a(href="/profile",style="height:23px")
+                                                a(href="/profile/"+viewer.username,style="height:23px")
                                                     i(class="icon-cog")
-                                                    p(style="padding-left:18px;top:3px;position:absolute;font-style:normal;") Profile
+                                                    p(style="padding-left:18px;top:3px;position:absolute;font-style:normal;") #{viewer.username} Profile
                                             li(style="margin-bottom: -5px;")
                                                 a(href="/help/support",style="height:23px")
                                                     i(class="icon-envelope")

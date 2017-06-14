@@ -3,8 +3,8 @@ extends navbar
 append styles
     style.
         .rounded-btn:hover,.rounded-btn:focus,.rounded-btn:active,.rounded-btn:visited{
-            color: rgba(255,255,255,1) !important;
-            border: 2px solid rgba(255,255,255,1) !important;
+            color: #444 !important;
+            border: 2px solid #444 !important;
             outline: none !important;
         }
         
@@ -20,29 +20,41 @@ append styles
             text-shadow:0 0px !important;
             font-weight:normal !important;
         }
+append scripts
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
 
 append content
-        a(class="btn rounded-btn",onClick="",style="position: absolute;right: 10px;top: 50px;") Add Jogo
-        div(style="margin-top:-30px;")
+        a(class="btn rounded-btn",href="/users/add",style="position: absolute;right: 10px;top: 50px;") Add User
+        div(style="margin-top:80px;")
             center
-                if(jogos)
-                    each jogo in jogos
-                        each dados in jogo
-                            div(style="margin-top:5%;padding-left:25%;text-align:justify;border-bottom:1px solid;width:100%;")
-                                form(action="/signup", method="post", id="jogosForm"+jd.id)
-                                    - var jg = dados;
-                                    label Imagem Casa:&emsp;&nbsp;&nbsp;
-                                        input(placeholder="Imagem Casa", name="imgcasa"+jd.id, type="text",value=jg.equipaCasa,style="margin-right:25px;")
-                                        Imagem Fora:&emsp;&emsp;&emsp;&emsp;
-                                            input(placeholder="Imagem Fora", name="imgfora"+jd.id, type="text",value=jg.equipaFora,style="margin-right:80px;")
-                                        n Nome do Jogo:&emsp;
-                                            input(placeholder="Nome do Jogo", name="njogo"+jd.id, type="text",value=jg.nome,style="margin-right:25px;")
-                                    label Golos Casa:&emsp;&emsp;&nbsp;&nbsp;&nbsp;
-                                        input(placeholder="Golos Casa", name="gcasa"+jd.id, type="text",value=jg.golosCasa,style="margin-right:25px;")
-                                        n Golos Fora:&emsp;
-                                            input(placeholder="Golos Fora", name="gfora"+jd.id, type="text",value=jg.golosFora,style="margin-right:80px;")
-                                        a(class="btn rounded-btn",onClick='subform("+jd.id+")',href="#") Save
-                                        span &emsp;&emsp;
-                                        a(class="btn rounded-btn",onClick='delform("+jd.id+")',href="#") Delete
-        block scripts
-            script
+                if(users)
+                    each user in users
+                        each dados in user
+                            - var usr = dados;
+                            div(style="margin-top:20px;padding-left:25%;text-align:justify;border-bottom:1px solid;width:100%;")
+                                form(action="/users", method="post", id="usersForm"+usr.id)
+                                    label Profile Picture Url:&emsp;
+                                        input(placeholder="Profile Picture Url", type="text",value=usr.picurl,name="picurl",style="margin-right:25px;")
+                                        | Username:&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                        input(placeholder="Username", value=usr.username,name="usernm", type="text",style="margin-right:80px;")
+                                        | Email:&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                        input(placeholder="Email", name="email", type="text",value=usr.email,style="margin-right:80px;")
+                                    label Password:&emsp;&emsp;&emsp;&emsp;&nbsp;
+                                        input(placeholder="Password", name="pass",onkeyup="verificaPass('"+usr.id+"')", type="password", id="pass"+usr.id,value=usr.password,style="margin-right:25px;")
+                                        | Confirm Password:&emsp;
+                                        input(placeholder="Confirm Password", name="confirmPass", id="confirmPass"+usr.id,onkeyup="verificaPass('"+usr.id+"')", type="password",style="margin-right:78px;")
+                                        | First Name:&emsp;
+                                        input(placeholder="First Name", name="firstName",value=usr.firstName, type="text",style="margin-right:25px;")
+                                    label Last Name:&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                                        input(placeholder="Last Name", name="lastName",value=usr.lastName, type="text",style="margin-right:25px;")
+                                        | IsAdmin:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;
+                                        input(placeholder="Is Admin", name="admin",value=usr.admin,type="text",style="margin-right:80px;")
+                                        a(class="btn rounded-btn",onClick="subform('"+usr.id+"');") Save
+                                        span &emsp;
+                                        a(class="btn rounded-btn",onClick="delform('"+usr.id+"');") Delete
+                                        span &emsp;
+                                        a(class="btn rounded-btn",onClick="rstform('"+usr.id+"')") Reset
+                                        br
+                                        label(style="display:none;margin-left:190px;margin-bottom:-10px;",id="confirmMessage"+usr.id) Message: 
+        script
+            include ../assets/scripts/users.js

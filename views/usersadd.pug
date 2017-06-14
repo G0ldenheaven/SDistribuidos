@@ -1,0 +1,58 @@
+extends navbar
+
+append styles
+    style.
+        .rounded-btn:hover,.rounded-btn:focus,.rounded-btn:active,.rounded-btn:visited{
+            color: #444 !important;
+            border: 2px solid #444 !important;
+            outline: none !important;
+        }
+        
+        .rounded-btn{
+            -webkit-border-radius: 50px !important;
+            border-radius: 50px !important;
+            color: #222 !important;
+            background: white !important;
+            border: 2px solid #222 !important;
+            font-size: 18px !important;
+            line-height: 40px !important;
+            padding: 0 25px !important;
+            text-shadow:0 0px !important;
+            font-weight:normal !important;
+        }
+append scripts
+    script(src="https://code.jquery.com/jquery-3.2.1.min.js")
+
+        
+append content
+        div(style="margin-top:80px;")
+            center
+                div(style="margin-top:20px;padding-left:25%;text-align:justify;width:100%;")
+                    form(action="/users/adduser", method="post", id="usersForm")
+                        label Profile Picture Url: &emsp;&emsp;
+                            input(placeholder="Profile Picture Url", type="text",name="picurl",style="margin-right:25px;")
+                        p Username:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                            input(placeholder="Username", name="username", type="text",style="margin-right:80px;")
+                        p Email:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                            input(placeholder="Email", name="email", type="text",style="margin-right:80px;")
+                        label Password:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;
+                            input(placeholder="Password", name="pass",onkeyup="verificaPass()", type="password", id="pass",style="margin-right:25px;")
+                        p Confirm Password:&emsp;&nbsp;&nbsp;
+                            input(placeholder="Confirm Password", name="confirmPass", id="confirmPass",onkeyup="verificaPass()", type="password",style="margin-right:78px;")
+                        p First Name:&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                            input(placeholder="First Name", name="firstName", type="text",style="margin-right:25px;")
+                        label Last Name:&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;
+                            input(placeholder="Last Name", name="lastName", type="text",style="margin-right:25px;")
+                        p IsAdmin:&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            input(placeholder="Is Admin", name="admin",type="text",style="margin-right:80px;")
+                            label(style="display:none;margin-left:190px;margin-bottom:-10px;",id="confirmMessage") Message: 
+                            br
+                            br
+                            br
+                            input(class="btn rounded-btn",type="submit",value="Save")
+                            span &emsp;&emsp;
+                            input(class="btn rounded-btn",type="reset",value="Reset")
+                            span &emsp;&emsp;
+                            a(class="btn rounded-btn",href="javascript:history.back()") Go Back
+                script
+                    include ../assets/scripts/usersadd.js

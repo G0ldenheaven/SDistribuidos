@@ -52,11 +52,11 @@ $("#userprof").submit(function(event) {
     // Impede o form de executar a função submit
     event.preventDefault();
     
-    // Se o url estiver preenchido usamos o ajax para enviar um request do tipo put para /users
+    // Se um dos campos for alterado usamos o ajax para enviar um request do tipo put para /profile
     // Desta forma iremos obter os dados a actualizar em app.js na função app.put('/profile') e os seus
     // valores estarão accessiveis atraves do req.body
     $.ajax({
-        url: '/profile',
+        url: '/profile/'user.id,
         data: {
         'profile':{
             'username':username,
