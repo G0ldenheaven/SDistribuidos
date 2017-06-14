@@ -287,13 +287,13 @@ var addUser = function addUser(profile){
     UserList.findOne({"username":profile.username},function(err,user){
         if(user){
             console.log('User already exists!');
-            return;
+            return err;
         }
         
         var usr = new UserList();
         
         usr.username = profile.username;
-        usr.password = generateHash(profile.password);
+        usr.password = usr.generateHash(profile.password);
         usr.email = profile.email;
         usr.firstName = profile.firstName;
         usr.lastName = profile.lastName;
