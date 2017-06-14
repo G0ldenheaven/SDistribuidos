@@ -11,7 +11,6 @@ module.exports = {                                                              
                                                                                         
   'url' : 'mongodb://Goldenheaven:sdistribuidos@ds062919.mlab.com:62919/futebol',       // url do mlab
   'port' : port,                                                                        // porta a escutar
-  //'ip': '13.81.108.99',                                                               // ip do azure
-  'ip': '127.0.0.1',                                                                    // localhost
+  'ip': '13.81.108.99',                                                               // ip do azure
   'clientSecret': '_Vku0atp3Bm9W9AZg-p4bWzDx2AEnlZ1vcFut6ZBhhdkjihyB6uoBR3CMQlu6OOX'    // segredo do auth0
 };
